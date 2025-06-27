@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Punjab Land Share Calculator</title>
+</head>
+<body>
+  <h2>Punjab Land Share Calculator</h2>
+  <form method="post">
+    Khewat No: <input name="khewat"><br>
+    Total Kanals: <input name="kanals"><br>
+    Total Marlas: <input name="marlas"><br><br>
+
+    {% for i in range(10) %}
+      <b>Owner {{ i+1 }}</b><br>
+      Name: <input name="name{{i}}">
+      Share (e.g. 1/2): <input name="share{{i}}">
+      Remarks: <input name="remarks{{i}}"><br><br>
+    {% endfor %}
+
+    <input type="submit" value="Calculate">
+  </form>
+
+  <hr>
+  <div>{{ result|safe }}</div>
+</body>
+</html>
+
