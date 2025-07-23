@@ -3,10 +3,8 @@ from fractions import Fraction
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
-import json
 
 app = Flask(__name__)
-
 
 def parse_fraction(fraction_str):
     try:
@@ -14,31 +12,11 @@ def parse_fraction(fraction_str):
     except (ValueError, ZeroDivisionError):
         return None
 
-
 def area_to_marlas(kanals, marlas):
     return int(kanals) * 20 + int(marlas)
 
-
 def marlas_to_str(marlas):
-    killa = marlas // 160
-    rem = marlas % 160
-    kanal = rem // 20
-    marla = rem % 20
-    sarshai = round((marla - int(marla)) * 9)
-    marla = int(marla)
-
-    parts = []
-    if killa:
-        parts.append(f"{killa} Killa")
-    if kanal:
-        parts.append(f"{kanal} Kanal")
-    if marla:
-        parts.append(f"{marla} Marla")
-    if sarshai:
-        parts.append(f"{sarshai} Sarshai")
-
-    return " ".join(parts) if parts else "0 Marla"
-
+    return f"{marlas // 20}K {marlas % 20}M"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -111,13 +89,13 @@ def index():
 
     return render_template("index.html")
 
-
 @app.route("/download", methods=["POST"])
 def download_pdf():
     data = request.form.get("pdf_data")
     if not data:
         return "No data provided", 400
 
+    import json
     parsed = json.loads(data)
 
     buffer = io.BytesIO()
@@ -149,7 +127,6 @@ def download_pdf():
     p.save()
     buffer.seek(0)
     return send_file(buffer, as_attachment=True, download_name="land_share_report.pdf", mimetype="application/pdf")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
