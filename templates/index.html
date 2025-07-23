@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Land Share Calculator</title>
+</head>
+<body>
+  <h2>Land Share Calculator</h2>
+  <form method="POST">
+    Khewat No: <input type="text" name="khewat"><br><br>
+    Total Area: <input type="number" name="kanals" placeholder="Kanals"> K & 
+    <input type="number" name="marlas" placeholder="Marlas"> M<br><br>
+    
+    {% for i in range(10) %}
+      <strong>Owner {{ i+1 }}</strong><br>
+      Name: <input type="text" name="name{{i}}">
+      Share (e.g. 1/2): <input type="text" name="share{{i}}">
+      Remarks: <input type="text" name="remarks{{i}}"><br><br>
+    {% endfor %}
+    
+    <button type="submit">Calculate</button>
+  </form>
+  <hr>
+  <div>{{ result|safe }}</div>
+</body>
+</html>
+
