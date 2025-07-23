@@ -1,1 +1,27 @@
-.vercel
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environment folder
+venv/
+env/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Output files or results
+*.xlsx
+*.csv
+
+# IDE config files
+.vscode/
+.idea/
+
